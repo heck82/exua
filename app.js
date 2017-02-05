@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost/exua');
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
-//								MODELS (somr changes on master)
+//								MODELS (changes....)
 
 var Item = require('./models/item');
 var User = require('./models/user');
