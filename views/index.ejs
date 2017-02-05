@@ -1,0 +1,32 @@
+<h1><%=title%></h1>
+
+<form method="GET" action="/item/add">
+	<input type="submit" value="Add Item">
+</form>
+<table border="1" style="width:50%">
+<%items.forEach(function(item){%>
+<tr>
+	<td>
+		<img height="160" width="120" alt="no image available" src="<%=item.coverImageUrl%>">
+		<a href="/item/view/<%=item._id%>"><input width="100" type="Button" value="View full"></a>
+	</td>
+	<td>
+		<h3><%=item.name%></h3>
+		<p>category: <%=item.category%></p>
+	</td>
+	<td>
+		<p><%=item.description%></p>
+	</td>
+	<td>
+		<form method="POST" action="/item/edit/<%=item._id%>">
+			<input type="submit" value="Edit">
+		</form>
+		<form method="POST" action="/item/delete/<%=item._id%>">
+			<input type="submit" value="Remove">
+		</form>
+	</td>
+</tr>
+<%})%>
+<form method="POST" action="/list/2">
+	<input type="submit" value="load More">
+</form>

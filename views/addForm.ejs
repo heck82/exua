@@ -1,0 +1,23 @@
+<h1>Add ITEM</h1>
+<form method="POST" action="/item/add">
+
+	<label>Name</label><br>
+	<input type="text" name="name"><br>
+
+	<label>Category</label><br>
+	<select name="category">
+		<option value="movie">movie</option>
+		<option value="book">book</option>
+		<option value="game">game</option>
+		<option value="other">other</option>
+	</select><br>
+
+	<label>Cover Imagr URL</label>
+	<input type="text" name="coverImageUrl"><br>
+
+	<label>Description</label><br>
+	<textarea type="text" name="description"></textarea><br><br>
+
+	<input type="submit" value="Add">
+	<a href="/list"><input type="button" value="cancel"></a>
+</form>

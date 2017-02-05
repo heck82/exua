@@ -1,0 +1,27 @@
+<h1>
+	Editing "<%=item.name%>"
+</h1>
+
+<form method="POST" action="/item/<%=item._id%>">
+
+	<label>Name</label><br>
+	<input type="text" name="name" value="<%=item.name%>"><br>
+
+	<label>Category</label><br>	
+	<select name="category">
+		<option value="<%=item.category%>"><%=item.category%></option>
+		<option value="movie">movie</option>
+		<option value="book">book</option>
+		<option value="game">game</option>
+		<option value="other">other</option>
+	</select>
+
+	<label>Cover Imagr URL</label>
+	<input type="text" name="coverImageUrl" value="<%=item.coverImageUrl%>"><br>
+
+	<label>Description</label><br>
+	<textarea type="text" name="description"><%=item.description%></textarea><br><br>
+
+	<input type="submit" value="Edit">
+	<a href="/item/view/<%=item._id%>"><input type="button" value="cancel"></a>
+</form>

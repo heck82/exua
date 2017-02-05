@@ -1,0 +1,28 @@
+<h1>
+	"<%=item.name%>"
+</h1>
+<table border="1" style="width:50%">
+<tr>
+	<td>
+		<img height="500" width="375" alt="no image available" src="<%=item.coverImageUrl%>">
+	</td>
+	<td>
+		<div>
+			<h3><%=item.name%></h3>
+			<p>category: <%=item.category%></p>
+		</div>
+		<div>
+			<p><%=item.description%></p>
+		</div>
+		<div>
+			<form method="POST" action="/item/edit/<%=item._id%>">
+			<input type="submit" value="Edit">
+			</form>
+			<form method="POST" action="/item/delete/<%=item._id%>">
+				<input type="submit" value="Remove">
+			</form>
+			<a href="/list"><input type="button" value="Back to list"></a>
+		</div>
+	</td>
+
+</tr>
