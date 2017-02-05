@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost/exua');
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
-//								MODELS (changes....)
+//								MODELS (changes....) ...and so on
 
 var Item = require('./models/item');
 var User = require('./models/user');
