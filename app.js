@@ -26,13 +26,31 @@ app.use(express.static(__dirname + "public"));
 //								VIEW LIST
 
 app.get("/list", function(req, res){
-
-	Item.find(function(err, docs){
+	Item.find()
+	.limit(3)
+	.sort({name: 1})
+	.exec('find', function(err, docs){
 		res.render("index", {
 			title: "Items",
+			page: 2,
 			items: docs
 		});
-	}).sort({'name': 1}).skip(0).limit();
+	});
+});
+
+app.post("/list", function(req, res){
+	console.log('params: '+req.params);
+	console.log('body: '+req.body.page);
+	Item.find()
+	.limit(req.body.page*3)
+	.sort({name: 1})
+	.exec('find', function(err, docs){
+		res.render("index", {
+			title: "Items",
+			page: (+req.body.page + 1),
+			items: docs
+		});
+	});
 });
 
 //								VIEW SINGLE ITEM

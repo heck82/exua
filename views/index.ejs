@@ -27,6 +27,9 @@
 	</td>
 </tr>
 <%})%>
-<form method="POST" action="/list/2">
-	<input type="submit" value="load More">
+</table>
+<br><br>
+<form method="POST" action="/list">
+	<input type="hidden" value=<%=page%> name="page">
+	<button>Load More</button>
 </form>
