@@ -26,29 +26,36 @@ app.use(express.static(__dirname + "public"));
 //								VIEW LIST
 
 app.get("/list", function(req, res){
-	Item.find()
-	.limit(3)
-	.sort({name: 1})
-	.exec('find', function(err, docs){
-		res.render("index", {
-			title: "Items",
-			page: 2,
-			items: docs
+	Item.find().count(function(err, count){
+		Item.find()
+		.limit(3)
+		.sort({name: 1})
+		.exec('find', function(err, docs){
+			res.render("index", {
+				title: "Items",
+				page: count/3+1^0,
+				items: docs
+			});
 		});
 	});
+		
 });
 
 app.post("/list", function(req, res){
-	console.log('params: '+req.params);
-	console.log('body: '+req.body.page);
-	Item.find()
-	.limit(req.body.page*3)
-	.sort({name: 1})
-	.exec('find', function(err, docs){
-		res.render("index", {
-			title: "Items",
-			page: (+req.body.page + 1),
-			items: docs
+	Item.find().count(function(err, count){
+
+		console.log('params: '+req.params);
+		console.log('body: '+req.body.page);
+		Item.find()
+		.skip((req.body.page-1)*3)
+		.limit(3)
+		.sort({name: 1})
+		.exec('find', function(err, docs){
+			res.render("index", {
+				title: "Items",
+				page: count/3+1^0,
+				items: docs
+			});
 		});
 	});
 });

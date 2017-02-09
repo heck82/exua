@@ -30,6 +30,7 @@
 </table>
 <br><br>
 <form method="POST" action="/list">
-	<input type="hidden" value=<%=page%> name="page">
-	<button>Load More</button>
+	<%for(var i = 1; i <= page ; i++){%>
+	<input type="submit" value=<%=i%> name="page">
+	<%}%>
 </form>
