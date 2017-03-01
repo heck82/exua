@@ -6,6 +6,7 @@ var itemSchema = new mongoose.Schema({
 	own: Boolean,
 	name: String,
 	category: String,
+	tags: [String],
 	description: String,
 	coverImageUrl: String,
 	size: Number,

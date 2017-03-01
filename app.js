@@ -12,6 +12,7 @@ mongoose.Promise = global.Promise;
 
 var Item = require('./models/item');
 var User = require('./models/user');
+var Tag = require('./models/tag');
 
 //								VIEW ENGINE
 
@@ -41,6 +42,8 @@ app.get("/list", function(req, res){
 		
 });
 
+//								PAGINATION
+
 app.post("/list", function(req, res){
 	Item.find().count(function(err, count){
 
@@ -64,9 +67,19 @@ app.post("/list", function(req, res){
 
 app.get('/item/view/:id', function(req, res){
 	Item.findById(req.params.id, function(err, doc){
-		res.render('item', {
+		res.render("item", {
 			item: doc
 		});
+	});
+});
+
+//								VIEW TAG PAGE
+
+app.get('/tags/:name', function(req, res){
+	Tag.findOne({name: req.params.name}, function(err, teg){
+		console.log(req.params.name);
+		console.log(teg.items);
+		res.send(teg.items);
 	});
 });
 
@@ -78,17 +91,28 @@ app.get('/item/add', function(req, res){
 app.post('/item/add', function(req, res){
 	console.log("Form submited");
 	console.log(req.body);
+	var tag = new Tag({
+		name: req.body.tagName,
+		items: req.body.name
+	});
 	var item = new Item({
 		category: req.body.category,
 		name: req.body.name,
+		tags: tag.name,
 		description: req.body.description,
 		coverImageUrl: req.body.coverImageUrl,
 		createDate: new Date()
 	});
 	console.log("the item is: "+item);
+	console.log("tag added: "+tag);
+
+	tag.save(function(err, tag){
+		if (err) console.log("loading item error: "+err);
+	});
 	item.save(function(err, item){
 		if (err) console.log("loading item error: "+err);
 	});
+	
 	res.redirect('/list');
 });
 
