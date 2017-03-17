@@ -38,24 +38,7 @@ app.get("/list", itemCtrl.list);
 
 //								PAGINATION
 
-app.post("/list", function(req, res){
-	Item.find().count(function(err, count){
-
-		console.log('params: '+req.params);
-		console.log('body: '+req.body.page);
-		Item.find()
-		.skip((req.body.page-1)*3)
-		.limit(3)
-		.sort({name: 1})
-		.exec('find', function(err, docs){
-			res.render("index", {
-				title: "Items",
-				page: count/3+1^0,
-				items: docs
-			});
-		});
-	});
-});
+app.post("/list", itemCtrl.paginate);
 
 //								VIEW SINGLE ITEM
 
@@ -137,7 +120,7 @@ app.put('/item/:id', function(req, res){
 //								DELETE ITEM
 
 app.delete('/item/delete/:id', function(req, res){
-	console.log("Has deleted: "+req.params.id);
+	console.log("Has been deleted: "+req.params.id);
 	Item.remove({_id: req.params.id}, function(err){
 		if(err) console.log(err);
 	});
