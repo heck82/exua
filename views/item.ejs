@@ -18,7 +18,7 @@
 			<form method="POST" action="/item/edit/<%=item._id%>">
 			<input type="submit" value="Edit">
 			</form>
-			<form method="POST" action="/item/delete/<%=item._id%>">
+			<form method="POST" action="/item/delete/<%=item._id%>?_method=DELETE">
 				<input type="submit" value="Remove">
 			</form>
 			<a href="/list"><input type="button" value="Back to list"></a>

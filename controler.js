@@ -1,10 +1,16 @@
-var myApp = angular.module('myApp',[]);
-myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
-	console.log("Hello from controller!");
-	$scope = $scope;
-	$http.get("/list").then(function(response){
-		console.log("GOT Data requested");
-		$scope.list = response;
-	});
-	
-}]);
+var Item = require('./models/item');
+
+module.exports.list = function(req, res){
+	Item.find().count(function(err, count){
+		Item.find()
+		.limit(3)
+		.sort({name: 1})
+		.exec('find', function(err, docs){
+			res.render("index", {
+				title: "Items",
+				page: count/3+1^0,
+				items: docs
+			});
+		});
+	});		
+}
