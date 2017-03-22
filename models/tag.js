@@ -7,7 +7,9 @@ var tagSchema = new mongoose.Schema({
 		type: String,
 		unique: true
 	},
-	items: [String]
+	items: [{
+    	type: String
+	}]
 });
 
 module.exports = mongoose.model('Tags', tagSchema);

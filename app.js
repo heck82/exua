@@ -42,13 +42,7 @@ app.post("/list", itemCtrl.paginate);
 
 //								VIEW SINGLE ITEM
 
-app.get('/item/view/:id', function(req, res){
-	Item.findById(req.params.id, function(err, doc){
-		res.render("item", {
-			item: doc
-		});
-	});
-});
+app.get('/item/view/:id', itemCtrl.viewItem);
 
 //								VIEW TAG PAGE
 
@@ -65,33 +59,7 @@ app.get('/tags/:name', function(req, res){
 app.get('/item/add', function(req, res){
 	res.render('addForm');
 });
-app.post('/item/add', function(req, res){
-	console.log("Form submited");
-	console.log(req.body);
-	var tag = new Tag({
-		name: req.body.tagName,
-		items: req.body.name
-	});
-	var item = new Item({
-		category: req.body.category,
-		name: req.body.name,
-		tags: tag.name,
-		description: req.body.description,
-		coverImageUrl: req.body.coverImageUrl,
-		createDate: new Date()
-	});
-	console.log("the item is: "+item);
-	console.log("tag added: "+tag);
-
-	tag.save(function(err, tag){
-		if (err) console.log("loading item error: "+err);
-	});
-	item.save(function(err, item){
-		if (err) console.log("loading item error: "+err);
-	});
-	
-	res.redirect('/list');
-});
+app.post('/item/add', itemCtrl.addItem);
 
 //								EDIT ITEM
 
@@ -103,29 +71,11 @@ app.post('/item/edit/:id', function(req, res){
 	});
 });
 
-app.put('/item/:id', function(req, res){
-	console.log("PUT method recieved");
-	Item.update({_id: req.params.id}, {
-		category: req.body.category,
-		name: req.body.name,
-		description: req.body.description,
-		coverImageUrl: req.body.coverImageUrl,
-		uptoDate: new Date()
-	}, function(err){
-		if(err) console.log(err);
-		res.redirect('/item/view/'+req.params.id);
-	});
-});
+app.put('/item/:id', itemCtrl.editItem);
 
 //								DELETE ITEM
 
-app.delete('/item/delete/:id', function(req, res){
-	console.log("Has been deleted: "+req.params.id);
-	Item.remove({_id: req.params.id}, function(err){
-		if(err) console.log(err);
-	});
-	res.redirect('/list');
-});
+app.delete('/item/delete/:id', itemCtrl.deleteItem);
 
 //								PORT LISTENING
 
