@@ -1,4 +1,4 @@
-<h1><%=title%></h1>
+<h1>List by tag: <%=tagName%></h1>
 
 <form method="GET" action="/item/add">
 	<input type="submit" value="Add Item">
@@ -35,7 +35,7 @@
 <%})%>
 </table>
 <br><br>
-<form method="GET" action="/list">
+<form method="GET" action="/tags/<%=tagName%>">
 	<%for(var i = 1; i <= page ; i++){%>
 	<input type="submit" value=<%=i%> name="page">
 	<%}%>

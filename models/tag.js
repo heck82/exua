@@ -8,7 +8,8 @@ var tagSchema = new mongoose.Schema({
 		unique: true
 	},
 	items: [{
-    	type: String
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Items'
 	}]
 });
 

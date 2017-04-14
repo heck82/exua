@@ -36,23 +36,14 @@ app.use(express.static(__dirname + "public"));
 
 app.get("/list", itemCtrl.list);
 
-//								PAGINATION
+//								VIEW TAG PAGE
 
-app.post("/list", itemCtrl.paginate);
+app.get("/tags/:tag", itemCtrl.tagList);
+
 
 //								VIEW SINGLE ITEM
 
 app.get('/item/view/:id', itemCtrl.viewItem);
-
-//								VIEW TAG PAGE
-
-app.get('/tags/:name', function(req, res){
-	Tag.findOne({name: req.params.name}, function(err, teg){
-		console.log(req.params.name);
-		console.log(teg.items);
-		res.send(teg.items);
-	});
-});
 
 //								ADD ITEM
 
