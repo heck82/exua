@@ -2,7 +2,7 @@
 	Editing "<%=item.name%>"
 </h1>
 
-<form method="POST" action="/item/<%=item._id%>">
+<form method="POST" action="/item/<%=item._id%>?_method=PUT">
 
 	<label>Name</label><br>
 	<input type="text" name="name" value="<%=item.name%>"><br>

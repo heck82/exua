@@ -7,7 +7,10 @@ var tagSchema = new mongoose.Schema({
 		type: String,
 		unique: true
 	},
-	items: [String]
+	items: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Items'
+	}]
 });
 
 module.exports = mongoose.model('Tags', tagSchema);
