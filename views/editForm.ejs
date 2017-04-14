@@ -20,7 +20,11 @@
 	<input type="text" name="coverImageUrl" value="<%=item.coverImageUrl%>"><br>
 
 	<label>Description</label><br>
-	<textarea type="text" name="description"><%=item.description%></textarea><br><br>
+	<textarea type="text" name="description"><%=item.description%></textarea><br>
+
+	<label>Add tags</label><br>
+	<textarea type="text" name="tagName"><%=item.tags%></textarea>
+	<br><br>
 
 	<input type="submit" value="Edit">
 	<a href="/item/view/<%=item._id%>"><input type="button" value="cancel"></a>

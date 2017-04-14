@@ -76,10 +76,10 @@ app.get('/item/view/:id', function(req, res){
 //								VIEW TAG PAGE
 
 app.get('/tags/:name', function(req, res){
-	Tag.findOne({name: req.params.name}, function(err, teg){
+	Tag.findOne({name: req.params.name}, function(err, tag){
 		console.log(req.params.name);
-		console.log(teg.items);
-		res.send(teg.items);
+		console.log(tag.items);
+		res.send(tag.items);
 	});
 });
 
@@ -95,7 +95,7 @@ app.post('/item/add', function(req, res){
 		name: req.body.tagName,
 		items: req.body.name
 	});
-	var item = new Item({
+	var item = new Item({ 
 		category: req.body.category,
 		name: req.body.name,
 		tags: tag.name,
@@ -103,8 +103,20 @@ app.post('/item/add', function(req, res){
 		coverImageUrl: req.body.coverImageUrl,
 		createDate: new Date()
 	});
-	console.log("the item is: "+item);
-	console.log("tag added: "+tag);
+	Tag.findOne({name: req.body.tagName}, function(err, tagObj){
+		console.log("the TAG in find: "+tagObj);
+		if(tagObj.name == req.body.tagName){
+			var itemNew = tagObj.items.push(req.body.name);
+			console.log("traversed name: "+tagObj.items);
+			Tag.update({_id: tagObj._id}, {
+				items: itemNew
+			}, function (err) {
+				if (err) console.log(err);
+			});
+		}
+	});
+	// console.log("the item is: "+item);
+	// console.log("tag added: "+tag);
 
 	tag.save(function(err, tag){
 		if (err) console.log("loading item error: "+err);
@@ -130,6 +142,7 @@ app.post('/item/:id', function(req, res){
 		category: req.body.category,
 		name: req.body.name,
 		description: req.body.description,
+		tags: req.body.tagName,
 		coverImageUrl: req.body.coverImageUrl,
 		uptoDate: new Date()
 	}, function(err){
