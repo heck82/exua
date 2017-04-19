@@ -90,9 +90,28 @@ module.exports.editItem = function(req, res){
 }
 
 module.exports.deleteItem = function(req, res){
-	console.log("Has been deleted: "+req.params.id);
-	Item.remove({_id: req.params.id}, function(err){
+	Item.findByIdAndRemove({_id: req.params.id}, function(err, item){
 		if(err) console.log(err);
+		item.tags.forEach(function(tag){
+			Tag.findOneAndUpdate({name: tag},{
+				$pull:{
+					items: item.id
+				}
+			}, function(err, tag){
+				if(err) console.log(err);
+				console.log("removed '"+item.name+"' from "+tag.name);
+			});
+			Tag.findOne({name: tag}, function(err, doc){
+				if(err) console.log(err);
+				console.log("test for "+doc);
+				if(doc.items[0]==undefined){
+					Tag.remove({name: tag}, function(err){
+						if(err)console.log(err);
+					});
+				}
+			})
+		});
+		console.log("Has been deleted: "+req.params.id);
 	});
 	res.redirect('/list');
 }

@@ -1,12 +1,14 @@
 var express = require('express');
 var methodOverride = require('method-override');
+var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
 
 //								DB SETUPS
 
-mongoose.connect('mongodb://localhost/exua');
+mongoose.connect('mongodb://heck82:hehe7256@ds161410.mlab.com:61410/myshare');
+// mongoose.connect('mongodb://localhost/exua');
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
 db.on('connected',function(err){
@@ -23,8 +25,9 @@ var itemCtrl = require('./controler');
 
 //								VIEW ENGINE
 
+app.use(morgan('dev'));
 app.set('view engine', 'ejs');
-app.set('views', __dirname + "/views");
+app.set('views', __dirname + "/views/pages");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
