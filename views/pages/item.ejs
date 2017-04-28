@@ -1,5 +1,7 @@
+<%include ../partials/head%>
+<%include ../partials/header%>
 <h1>
-	"<%=item.name%>"
+"<%=item.name%>"
 </h1>
 <table border="1" style="width:50%">
 <tr>
@@ -8,16 +10,28 @@
 	</td>
 	<td>
 		<div>
-			<h3><%=item.name%></h3>
-			<p>category: <%=item.category%></p>
-			<p>tags: <a href="/tags/<%=item.tags%>"><%=item.tags%></a></p>
+			<h3>
+				<%=item.name%>
+			</h3>
+			<p>category:
+				<%=item.category%>
+			</p>
+			<p>tags:
+			<%item.tags.forEach(function(tag){%>
+				<a href="/tags/<%=tag%>">
+					<%=tag%>
+				</a>
+			<%})%>
+			</p>
 		</div>
 		<div>
-			<p><%=item.description%></p>
+			<p>
+				<%=item.description%>
+			</p>
 		</div>
 		<div>
 			<form method="POST" action="/item/edit/<%=item._id%>">
-			<input type="submit" value="Edit">
+				<input type="submit" value="Edit">
 			</form>
 			<form method="POST" action="/item/delete/<%=item._id%>?_method=DELETE">
 				<input type="submit" value="Remove">
@@ -27,3 +41,4 @@
 	</td>
 
 </tr>
+<%include ../partials/footer%>

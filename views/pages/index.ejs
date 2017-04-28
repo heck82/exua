@@ -1,6 +1,10 @@
 <%include ../partials/head%>
 <%include ../partials/header%>
 
+<h1>List of <%=title%></h1>
+
+<%include ../partials/paging%>
+
 <table class="table table-hover">
 <%items.forEach(function(item){%>
 	<tr>
@@ -27,22 +31,5 @@
 <%})%>
 </table>
 
-
-<nav aria-label="Page navigation">
-	<ul class="pagination">
-		<li>
-			<a href="/list?page=1" aria-label="Previous">
-				<span aria-hidden="true">&laquo;</span>
-			</a>
-		</li>
-		<%for(var i = 1; i <= page ; i++){%>
-		<li><a href="/list?page=<%=i%>"><%=i%></a></li>
-		<%}%>
-		<li>
-			<a href="/list?page=<%=page%>" aria-label="Next">
-				<span aria-hidden="true">&raquo;</span>
-			</a>
-		</li>
-	</ul>
-</nav>
+<%include ../partials/paging%>
 <%include ../partials/footer%>
