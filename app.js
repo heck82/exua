@@ -43,8 +43,11 @@ app.get("/list", itemCtrl.list);
 
 app.get("/tags/:tag", itemCtrl.tagList);
 
-
 //								VIEW SINGLE ITEM
+
+app.get('/singup', function(req, res){
+	res.render('singup')
+});
 
 app.get('/item/view/:id', itemCtrl.viewItem);
 
