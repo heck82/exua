@@ -1,11 +1,23 @@
-<span>Please fill the form:</span>
-<form>
-<label>name</label>
-<input>
-<label>e-mail</label>
-<input>
-<label>password</label>
-<input>
-<input>
-<input type="submit">
-</form>
+<%include ../partials/head%>
+<%include ../partials/header%>
+<div class="col-xs-2 col-md-offset-5">
+<span class="h2">Please fill the form:</span>
+    <form method="POST" acrion="/signup">
+        <div class="form-group">
+            <label>name</label>
+            <input type="text" class="form-control" placeholder="Name">
+        </div>
+        <div class="form-group" required>
+            <label>e-mail</label>
+            <input type="email" class="form-control" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label>password</label>
+            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" placeholder="Confirm">
+        </div>
+        <button type="submit" class="btn btn-default">Sign Up</button>
+        <a href="/list" class="btn btn-default">Cancel</a>
+    </form>
+</div>
+<%include ../partials/footer%>
