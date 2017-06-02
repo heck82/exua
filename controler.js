@@ -72,7 +72,7 @@ module.exports.addItem = function(req, res) {
         });
     });
 
-    res.redirect('/list');
+    res.redirect('/');
 }
 
 module.exports.editItem = function(req, res) {
@@ -115,7 +115,7 @@ module.exports.deleteItem = function(req, res) {
         });
         console.log("Has been deleted: " + req.params.id);
     });
-    res.redirect('/list');
+    res.redirect('/');
 }
 
 module.exports.tagList = function(req, res) {
@@ -137,4 +137,54 @@ module.exports.tagList = function(req, res) {
                 })
         })
     })
+}
+
+module.exports.addUser = function(req, res) {
+    console.log("Form submited");
+    console.log(req.body);
+    var item = new Item({
+        category: req.body.category,
+        name: req.body.name,
+        nameLoCase: req.body.name.toLowerCase(),
+        tags: req.body.tagName.split(" "),
+        description: req.body.description,
+        coverImageUrl: req.body.coverImageUrl,
+        createDate: new Date()
+    });
+    console.log("the item is: " + item);
+
+    item.save(function(err, item) {
+        if (err) console.log("loading item error: " + err);
+        else console.log("saved to db " + item.name);
+    });
+
+    var tags = req.body.tagName.split(" ");
+    console.log("array of tags: " + tags);
+    tags.forEach(function(tagName) {
+        console.log("tad Name is " + tagName);
+        Tag.findOne({ name: tagName }, function(err, doc) {
+            if (!doc) {
+                console.log("DOC was NOT found, and CRATED NEW");
+                var tag = new Tag({
+                    name: tagName,
+                    items: item._id
+                });
+                tag.save(function(err, tag) {
+                    if (err) console.log("SAVING tag ERROR: " + err);
+                    else console.log("tag added: " + tag.name);
+                });
+            } else {
+                Tag.findOneAndUpdate({ name: tagName }, {
+                    $push: {
+                        items: item._id
+                    }
+                }, function(err, doc) {
+                    if (err) console.log(err);
+                    console.log("updated " + doc.name);
+                });
+            };
+        });
+    });
+
+    res.redirect('/');
 }

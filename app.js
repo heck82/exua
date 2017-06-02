@@ -37,7 +37,7 @@ app.use(express.static(__dirname + "/public"));
 
 //								VIEW LIST
 
-app.get("/list", itemCtrl.list);
+app.get("/", itemCtrl.list);
 
 //								VIEW TAG PAGE
 
@@ -45,11 +45,15 @@ app.get("/tags/:tag", itemCtrl.tagList);
 
 //								VIEW SINGLE ITEM
 
+
+app.get('/item/view/:id', itemCtrl.viewItem);
+
+//								ADD USER
+
 app.get('/singup', function(req, res) {
     res.render('singup');
 });
-
-app.get('/item/view/:id', itemCtrl.viewItem);
+app.post('/signup', itemCtrl.addUser);
 
 //								ADD ITEM
 
