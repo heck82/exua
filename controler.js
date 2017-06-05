@@ -161,7 +161,7 @@ module.exports.addUser = function(req, res) {
                 }
             });
         } else {
-            res.end(console.error("email already used"));
+            res.end();
         }
     });
     console.log("the user is: " + user);
