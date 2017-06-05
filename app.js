@@ -50,8 +50,8 @@ app.get('/item/view/:id', itemCtrl.viewItem);
 
 //								ADD USER
 
-app.get('/singup', function(req, res) {
-    res.render('singup');
+app.get('/signup', function(req, res) {
+    res.render('signup');
 });
 app.post('/signup', itemCtrl.addUser);
 

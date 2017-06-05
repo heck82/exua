@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
     active: Boolean,
-    firstName: String,
+    name: String,
     email: String,
-    pass: String,
+    password: String,
     createDate: Date,
     uptoDate: Date
 });
