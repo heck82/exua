@@ -28,8 +28,9 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in</a>
           <ul class="dropdown-menu">
-            <li><input class="form-control" placeholder="Username"></li>
-            <li><input class="form-control" placeholder="Password"></li>
+          <form method="POST" action="/signin">
+            <li><input class="form-control" placeholder="email" name="email"></li>
+            <li><input class="form-control" placeholder="Password" name="password"></li>
             <li role="separator" class="divider"></li>
             <li>
               <div class="btn-group">
@@ -37,6 +38,7 @@
                 <input type="submit" class="btn btn-info" value="Sign In">
               </div>
             </li>
+          </form>
           </ul>
         </li>
       </ul>

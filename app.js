@@ -43,6 +43,22 @@ app.get("/", itemCtrl.list);
 
 app.get("/tags/:tag", itemCtrl.tagList);
 
+//                              SIGN IN
+
+app.post("/signin", function(req, res) {
+    User.findOne({ email: req.body.email }, function(err, data) {
+        if (!data) {
+            res.send("no user found");
+        } else {
+            if (data.email == req.body.email && data.password == req.body.password) {
+                res.send("Autherization successful");
+            } else {
+                res.send("<script>alert('password is incorrect');</script>");
+            }
+        }
+    });
+});
+
 //								VIEW SINGLE ITEM
 
 

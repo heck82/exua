@@ -154,14 +154,12 @@ module.exports.addUser = function(req, res) {
             user.save(function(err, user) {
                 if (err) console.log("loading item error: " + err);
                 else {
-                    res.redirect('/', function() {
-                        console.log("User successfuly created!");
-                    });
+                    res.redirect('/');
                     console.log("saved to db " + user.name);
                 }
             });
         } else {
-            res.end();
+            res.send("Email already in use");
         }
     });
     console.log("the user is: " + user);
